@@ -1,0 +1,11 @@
+server:
+  port: 9191
+
+spring:
+  pulsar:
+    service-url: pulsar://localhost:6650
+    producer:
+      topic: my-topic
+    consumer:
+      subscription-name: my-subscription
+
