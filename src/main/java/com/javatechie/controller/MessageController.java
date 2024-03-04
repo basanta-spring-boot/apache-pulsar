@@ -1,5 +1,6 @@
 package com.javatechie.controller;
 
+import com.javatechie.dto.Customer;
 import com.javatechie.producer.PulsarProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,18 @@ public class MessageController {
         try {
             producerService.sendMessage(message);
             return ResponseEntity.ok("Message sent successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error sending message: " + e.getMessage());
+        }
+    }
+
+
+    @PostMapping("/users")
+    public ResponseEntity<String> sendCustomMessage(@RequestBody Customer customer) {
+        try {
+            producerService.sendCustomMessage(customer);
+            return ResponseEntity.ok("Custom Message sent successfully");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Error sending message: " + e.getMessage());

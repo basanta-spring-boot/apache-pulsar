@@ -3,9 +3,17 @@ server:
 
 spring:
   pulsar:
-    service-url: pulsar://localhost:6650
+    client:
+      service-url: pulsar://localhost:6650
     producer:
-      topic: my-topic
+      topic-name1: my-topic
+      topic-name2: customer-topic
     consumer:
-      subscription-name: my-subscription
+      subscription:
+        name: my-subscription
+    defaults:
+      type-mappings:
+        - messageType: com.javatechie.dto.Customer
+          schema-info:
+            schema-type: JSON
 
